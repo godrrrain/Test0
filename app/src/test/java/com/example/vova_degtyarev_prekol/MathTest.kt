@@ -28,4 +28,9 @@ class MathTest {
     fun multiplication() {
         println("Типа умножение")
     }
+
+    @Test
+    fun subtraction() {
+        println("Типа вычитание")
+    }
 }
