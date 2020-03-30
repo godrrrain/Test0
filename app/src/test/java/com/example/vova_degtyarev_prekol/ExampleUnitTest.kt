@@ -10,7 +10,7 @@ import org.junit.Test
 class ExampleUnitTest {
 
 
-    fun formatPrice(price: Double, measure: String = "шт", sale: Int = 0): String {
+    private fun formatPrice(price: Double, measure: String = "шт", sale: Int = 0): String {
         if (sale != 0) {
             val discountPrice = price * (100 - sale) / 100
             return "$discountPrice/$measure (скидка $sale%)"
