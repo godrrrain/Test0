@@ -13,4 +13,9 @@ class MathTest {
     fun helloWorld() {
         println("Hello_World")
     }
+
+    @Test
+    fun dividing() {
+        println("Типа деление")
+    }
 }
