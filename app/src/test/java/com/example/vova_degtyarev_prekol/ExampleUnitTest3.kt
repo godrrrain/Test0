@@ -7,10 +7,10 @@ import org.junit.Test
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest2 {
+class ExampleUnitTest3 {
 
     @Test
-    fun bayBay() {
-        print("Pokaaaaaaaaaa")
+    fun helloWorld() {
+        print("Helwrld!!!!!!!!")
     }
 }
