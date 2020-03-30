@@ -18,4 +18,9 @@ class MathTest {
     fun increment() {
         println("*Типа добавление*")
     }
+
+    @Test
+    fun dividing() {
+        println("Типа деление")
+    }
 }
