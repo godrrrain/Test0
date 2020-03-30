@@ -23,4 +23,9 @@ class MathTest {
     fun dividing() {
         println("Типа деление")
     }
+
+    @Test
+    fun multiplication() {
+        println("Типа умножение")
+    }
 }
