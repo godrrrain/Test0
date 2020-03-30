@@ -1,0 +1,2 @@
+rootProject.name='vova_degtyarev_prekol'
+include ':app'
