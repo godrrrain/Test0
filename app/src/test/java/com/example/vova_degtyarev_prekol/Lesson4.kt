@@ -13,12 +13,34 @@ class Lesson4 {
     fun example() {
 
         val iphoneCase = Product(price = 100.0, salePercent = 30)
+        val samsungCase = Product(price = 160.0, salePercent = 40)
 
         val pricePrinter: PricePrinter = ProductionPrintPrice()
 
-        val discountIphoneCasePrice = iphoneCase.calcDiscountPrice()
-        pricePrinter.print(discountIphoneCasePrice)
+        val products = listOf(iphoneCase, samsungCase)
+        val discountPrices = products.map { it.calcDiscountPrice() }
+
+        discountPrices.forEach { discountPrice ->
+            pricePrinter.print(discountPrice)
+        }
+
+        val cartMain = Cart(products)
+        pricePrinter.print(cartMain.calcFinalPrice())
+
     }
+}
+
+class Cart(
+    private val listOfProducts: List<Product> = emptyList()
+) {
+    fun calcFinalPrice(): Double {
+        var sum = 0.0
+        listOfProducts.forEach {
+            sum += it.calcDiscountPrice()
+        }
+        return sum
+    }
+
 }
 
 class Product(
