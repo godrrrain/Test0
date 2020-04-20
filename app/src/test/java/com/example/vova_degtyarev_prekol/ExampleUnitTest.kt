@@ -24,5 +24,6 @@ class ExampleUnitTest {
     @Test
     fun printDiscount() {
         println(formatPrice(price = 123.0, measure = "кг", sale = 5))
+
     }
 }

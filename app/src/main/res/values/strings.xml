@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">vova_degtyarev_prekol</string>
+    <string name="checkout_header">Оформление заказа</string>
+    <string name="checkout_sum">Итого к оплате</string>
+    <string name="checkout_personal_data_header">Личные данные</string>
+    <string name="mobile">Телефон</string>
+    <string name="surname">Фамилия</string>
+    <string name="name">Имя</string>
+    <string name="third_name">Отчество</string>
+    <string name="content_of_order">Состав заказа</string>
+    <string name="discount">Скидка</string>
+    <string name="button_pay">Оплатить</string>
+    <string name="tip_for_mobile">Пример: +79999999999 или 89999999999</string>
 </resources>
