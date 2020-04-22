@@ -1,35 +1,53 @@
-package com.example.vova_degtyarev_prekol
+package com.example.vova_degtyarev_prekol.ui
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import com.example.vova_degtyarev_prekol.ProductsPresenter
+import com.example.vova_degtyarev_prekol.ProductsView
+import com.example.vova_degtyarev_prekol.R
+import com.example.vova_degtyarev_prekol.ui.CatalogActivity.Companion.IS_USER_AUTH
+import com.example.vova_degtyarev_prekol.ui.CatalogActivity.Companion.PRODUCT_ID
+import com.example.vova_degtyarev_prekol.ui.CatalogActivity.Companion.REQUEST_AUTH
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), ProductsView {
+class CheckoutActivity : BaseActivity(),
+    ProductsView {
 
     private val presenter = ProductsPresenter()
+    private var isAuth: Boolean = false
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val productId = intent.extras?.getInt(PRODUCT_ID, -1)
+        Log.d(tag, productId.toString())
 
-        val iphoneCase = Product(price = 130.0, salePercent = 30, productName = "iPhone Case")
-        val samsungCase = Product(price = 160.0, salePercent = 40, productName = "Samsung Case")
-        val nokiaCase = Product(price = 100.0, salePercent = 10, productName = "Nokia Case")
-        val cartMain = Cart(listOf(iphoneCase, samsungCase, nokiaCase))
+        checkoutNumberOfProducts.text = "Товары в корзине(${presenter.getCart().getList().size})"
+        checkoutValueOfNumberOfProducts.text =
+            "${presenter.getCart().calcWithoutDiscountPrice()} руб"
 
-        checkoutNumberOfProducts.text = "Товары в корзине(${cartMain.getList().size})"
-        checkoutValueOfNumberOfProducts.text = "${cartMain.calcWithoutDiscountPrice()} руб"
+        checkoutValueOfDiscount.text = "-${presenter.getCart().calcDiscountFullDiscount()} руб"
 
-        checkoutValueOfDiscount.text = "-${cartMain.calcDiscountFullDiscount()} руб"
-
-        checkoutSumValue.text = "${cartMain.calcFinalPrice()} руб"
+        checkoutSumValue.text = "${presenter.getCart().calcFinalPrice()} руб"
         checkoutPay.setOnClickListener {
+            isAuth = true
+            setResult(REQUEST_AUTH, Intent().apply {
+                putExtra(IS_USER_AUTH, isAuth)
+            })
             Toast.makeText(this, "Переход на страницу оплаты", Toast.LENGTH_SHORT).show()
         }
+
+        checkoutBackButton.setOnClickListener {
+            finish()
+        }
+
 
         presenter.attachView(this)
 

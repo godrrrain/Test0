@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">vova_degtyarev_prekol</string>
+    <string name="app_name">Chiply</string>
     <string name="checkout_header">Оформление заказа</string>
     <string name="checkout_sum">Итого к оплате</string>
     <string name="checkout_personal_data_header">Личные данные</string>
