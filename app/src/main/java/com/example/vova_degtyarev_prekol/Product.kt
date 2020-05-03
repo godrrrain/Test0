@@ -19,4 +19,6 @@ class Product(
     fun getProductName(): String = productName
 
     fun getPrice(): Double = price
+
+    fun getDiscount(): Int = salePercent
 }

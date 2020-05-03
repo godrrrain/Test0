@@ -3,10 +3,19 @@ package com.example.vova_degtyarev_prekol.ui
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vova_degtyarev_prekol.R
+import com.example.vova_degtyarev_prekol.presenters.CatalogPresenter
 import kotlinx.android.synthetic.main.catalog_layout.*
 
-class CatalogActivity : BaseActivity() {
+class CatalogActivity : BaseActivity(), CatalogView {
+
+    private val presenter =
+        CatalogPresenter()
+    private val adapter = CategoryAdapter { category ->
+        presenter.removeItem(category)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.catalog_layout)
@@ -18,13 +27,10 @@ class CatalogActivity : BaseActivity() {
             startActivityForResult(intent, REQUEST_AUTH)
         }
 
-        catalogDetailsButton1.setOnClickListener {
-            startActivity(Intent(this, DetailsActivity::class.java))
-        }
-
-        catalogDetailsButton2.setOnClickListener {
-            startActivity(Intent(this, DetailsActivity::class.java))
-        }
+        categoryRV.layoutManager = LinearLayoutManager(this)
+        categoryRV.adapter = adapter
+        presenter.attachView(this)
+        presenter.setData()
 
         catalogCartButton.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
@@ -38,6 +44,14 @@ class CatalogActivity : BaseActivity() {
             val isUserAuth = data?.extras?.getBoolean(IS_USER_AUTH)
             Log.d(tag, isUserAuth.toString())
         }
+    }
+
+    override fun setCategories(list: List<String>) {
+        adapter.setData(list)
+    }
+
+    override fun remoteItem(position: Int) {
+        adapter.notifyItemRemoved(position)
     }
 
     companion object {

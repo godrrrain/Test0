@@ -8,9 +8,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
-import com.example.vova_degtyarev_prekol.ProductsPresenter
-import com.example.vova_degtyarev_prekol.ProductsView
 import com.example.vova_degtyarev_prekol.R
+import com.example.vova_degtyarev_prekol.presenters.ProductsPresenter
 import com.example.vova_degtyarev_prekol.ui.CatalogActivity.Companion.IS_USER_AUTH
 import com.example.vova_degtyarev_prekol.ui.CatalogActivity.Companion.PRODUCT_ID
 import com.example.vova_degtyarev_prekol.ui.CatalogActivity.Companion.REQUEST_AUTH
@@ -19,7 +18,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class CheckoutActivity : BaseActivity(),
     ProductsView {
 
-    private val presenter = ProductsPresenter()
+    private val presenter =
+        ProductsPresenter()
     private var isAuth: Boolean = false
 
     @SuppressLint("SetTextI18n")

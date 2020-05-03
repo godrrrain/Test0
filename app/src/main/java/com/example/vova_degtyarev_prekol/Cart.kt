@@ -1,7 +1,7 @@
 package com.example.vova_degtyarev_prekol
 
 class Cart(
-    private val listOfProducts: List<Product> = emptyList()
+    private val listOfProducts: List<Product> = mutableListOf()
 ) {
     fun getList() = listOfProducts
 

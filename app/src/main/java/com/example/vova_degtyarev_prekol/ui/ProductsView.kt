@@ -1,4 +1,4 @@
-package com.example.vova_degtyarev_prekol
+package com.example.vova_degtyarev_prekol.ui
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

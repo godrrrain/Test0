@@ -1,6 +1,10 @@
-package com.example.vova_degtyarev_prekol
+package com.example.vova_degtyarev_prekol.presenters
 
 import android.text.TextUtils
+import com.example.vova_degtyarev_prekol.Cart
+import com.example.vova_degtyarev_prekol.CreateOrderModel
+import com.example.vova_degtyarev_prekol.Product
+import com.example.vova_degtyarev_prekol.ui.ProductsView
 import moxy.MvpPresenter
 
 class ProductsPresenter : MvpPresenter<ProductsView>() {
@@ -8,7 +12,13 @@ class ProductsPresenter : MvpPresenter<ProductsView>() {
     private val samsungCase = Product(price = 160.0, salePercent = 40, productName = "Samsung Case")
     private val nokiaCase = Product(price = 100.0, salePercent = 10, productName = "Nokia Case")
 
-    private val cartMain = Cart(listOf(iphoneCase, samsungCase, nokiaCase))
+    private val cartMain = Cart(
+        listOf(
+            iphoneCase,
+            samsungCase,
+            nokiaCase
+        )
+    )
 
 
     private val model = CreateOrderModel()
@@ -39,13 +49,16 @@ class ProductsPresenter : MvpPresenter<ProductsView>() {
     }
 
     private fun checkMobileSymbols(text: String): Boolean {
-        if (text.firstOrNull() == '+' && text.length == 12) {
-            if (TextUtils.isDigitsOnly(text.subSequence(1, 12))) {
-                return false
+        when {
+            text.firstOrNull() == '+' && text.length == 12 -> {
+                if (TextUtils.isDigitsOnly(text.subSequence(1, 12))) {
+                    return false
+                }
             }
-        } else if (text.firstOrNull() != '+' && text.length == 11) {
-            if (TextUtils.isDigitsOnly(text)) {
-                return false
+            text.firstOrNull() != '+' && text.length == 11 -> {
+                if (TextUtils.isDigitsOnly(text)) {
+                    return false
+                }
             }
         }
         return true
